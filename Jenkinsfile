@@ -1,15 +1,26 @@
 pipeline {
   agent any
   stages {
-    stage('pull') {
+    stage('print message') {
       steps {
-        sh 'echo "test"'
+        echo 'Nexell pipeline Start'
       }
     }
-    stage('') {
+    stage('git pull') {
       steps {
-        setGerritReview()
-        setGerritReview(customUrl: 'review.gerrithub.io', unsuccessfulMessage: 'abc')
+        sh '''git pull abcde
+
+'''
+      }
+    }
+    stage('parent commit check') {
+      steps {
+        sh 'git cherry-pick abcd'
+      }
+    }
+    stage('build') {
+      steps {
+        sh 'build.sh'
       }
     }
   }
